@@ -1,6 +1,6 @@
 .auth-container {
     max-width: 400px;
-    margin: 50px auto;
+    margin: 0 auto;
     padding: 30px;
     background: white;
     border-radius: 8px;
@@ -10,6 +10,7 @@
   .auth-container h2 {
     margin-bottom: 25px;
     color: #333;
+    text-align: center;
   }
   
   .auth-container form {
@@ -19,11 +20,11 @@
   }
   
   .auth-container input {
-    width: 100%;
     padding: 12px;
     font-size: 16px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    flex: 1;
   }
   
   .auth-container input:focus {
@@ -32,7 +33,6 @@
   }
   
   .auth-container button {
-    width: 100%;
     padding: 12px;
     background-color: #fc8019;
     color: white;
@@ -41,6 +41,7 @@
     font-weight: bold;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s;
   }
   
   .auth-container button:hover {
