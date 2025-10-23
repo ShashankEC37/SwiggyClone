@@ -1,0 +1,114 @@
+.detail-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .detail-loading,
+  .detail-error {
+    text-align: center;
+    font-size: 18px;
+    padding: 40px;
+    color: #666;
+  }
+  
+  .detail-header {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .detail-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+  }
+  
+  .detail-info {
+    padding: 30px;
+  }
+  
+  .detail-name {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .detail-cuisine {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .detail-stats {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .detail-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .detail-stat-label {
+    font-size: 14px;
+    color: #999;
+    text-transform: uppercase;
+  }
+  
+  .detail-stat-value {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .detail-rating {
+    background-color: #48c479;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+  
+  .detail-food-type {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+  }
+  
+  .detail-food-type.veg {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #4caf50;
+  }
+  
+  .detail-food-type.non-veg {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #f44336;
+  }
+  
+  .detail-address {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+  }
+  
+  .detail-address h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .detail-address p {
+    color: #666;
+    font-size: 16px;
+  }

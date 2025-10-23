@@ -3,6 +3,7 @@ import { useState } from "react";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import HomePage from "./pages/HomePage";
+import RestaurantDetail from "./pages/RestaurantDetail";
 import "./App.css";
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
           element={<Login setIsLoggedIn={setIsLoggedIn} />}
         />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/restaurant/:id" element={<RestaurantDetail />} />
       </Routes>
     </Router>
   );
