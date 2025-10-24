@@ -7,6 +7,7 @@ connectDB();
 
 const authRoutes = require("./routes/auth");
 const restaurant = require("./routes/restaurant");
+const menuItem = require("./routes/menuItem");
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/restaurants", restaurant);
+app.use("/api/menuItem", menuItem);
 
 app.get("/", (req, res) => {
   res.json({ message: "Swiggy Clone API is running" });

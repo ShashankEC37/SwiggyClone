@@ -1,24 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getRestaurantByIdAPI } from "../services/api";
+import { getRestaurantByIdAPI, getMenuItemsAPI } from "../services/api";
 import "./RestaurantDetail.css";
 
 const RestaurantDetail = () => {
   const { id } = useParams();
   const [restaurant, setRestaurant] = useState(null);
+  const [menuItems, setMenuItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchRestaurant();
+    fetchRestaurantAndMenu();
   }, [id]);
 
-  const fetchRestaurant = async () => {
+  const fetchRestaurantAndMenu = async () => {
     try {
-      const data = await getRestaurantByIdAPI(id);
-      setRestaurant(data);
+      const restaurantData = await getRestaurantByIdAPI(id);
+      const menuData = await getMenuItemsAPI(id);
+
+      setRestaurant(restaurantData);
+      setMenuItems(menuData);
       setLoading(false);
     } catch (error) {
-      console.error("Error fetching restaurant:", error);
+      console.error("Error fetching data:", error);
       setLoading(false);
     }
   };
@@ -67,6 +71,38 @@ const RestaurantDetail = () => {
             <p>{restaurant.address}</p>
           </div>
         </div>
+      </div>
+
+      <div className="menu-section">
+        <h2>Menu</h2>
+        {menuItems.length === 0 ? (
+          <p>No menu items available</p>
+        ) : (
+          <div className="menu-grid">
+            {menuItems.map((item) => (
+              <div key={item._id} className="menu-item-card">
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="menu-item-image"
+                />
+                <div className="menu-item-info">
+                  <div className="menu-item-header">
+                    <h3 className="menu-item-name">{item.name}</h3>
+                    <span className={`menu-food-type ${item.foodType}`}>
+                      {item.foodType === "veg" ? "🟢" : "🔴"}
+                    </span>
+                  </div>
+                  <p className="menu-item-description">{item.description}</p>
+                  <div className="menu-item-footer">
+                    <span className="menu-item-price">₹{item.price}</span>
+                    <button className="add-button">Add</button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

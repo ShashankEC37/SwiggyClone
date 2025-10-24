@@ -112,3 +112,99 @@
     color: #666;
     font-size: 16px;
   }
+
+  .menu-section {
+    margin-top: 30px;
+  }
+  
+  .menu-section h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+  }
+  
+  .menu-item-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .menu-item-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .menu-item-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .menu-item-info {
+    padding: 15px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .menu-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+  }
+  
+  .menu-item-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+  }
+  
+  .menu-food-type {
+    font-size: 18px;
+  }
+  
+  .menu-item-description {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 12px;
+    flex: 1;
+  }
+  
+  .menu-item-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .menu-item-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .add-button {
+    background-color: #fc8019;
+    color: white;
+    border: none;
+    padding: 8px 24px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .add-button:hover {
+    background-color: #e87316;
+  }
