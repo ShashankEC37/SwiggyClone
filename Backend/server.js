@@ -16,7 +16,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/restaurants", restaurant);
-app.use("/api/menuItem", menuItem);
+app.use("/api/menu-items", menuItem);
 
 app.get("/", (req, res) => {
   res.json({ message: "Swiggy Clone API is running" });

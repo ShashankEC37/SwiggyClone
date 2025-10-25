@@ -5,9 +5,9 @@ const MenuItem = require("../model/MenuItem");
 router.get("/restaurant/:restaurantId", async (req, res) => {
   try {
     const menuItem = await MenuItem.find({
-      restaurantId: req.params.id,
+      restaurantId: req.params.restaurantId,
     });
-    res.status.apply(200).json(menuItem);
+    res.status(200).json(menuItem);
   } catch (error) {
     console.log("Failed to fetch menuItem", error);
   }
