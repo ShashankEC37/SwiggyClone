@@ -2,12 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getRestaurantByIdAPI, getMenuItemsAPI } from "../services/api";
 import "./RestaurantDetail.css";
+import { useCart } from "../context/CartContext";
 
 const RestaurantDetail = () => {
   const { id } = useParams();
   const [restaurant, setRestaurant] = useState(null);
   const [menuItems, setMenuItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [addedItemId, setAddedItemId] = useState(null);
+
+  const { addToCart } = useCart();
 
   useEffect(() => {
     fetchRestaurantAndMenu();
@@ -28,7 +32,11 @@ const RestaurantDetail = () => {
   };
 
   if (loading) {
-    return <div className="detail-loading">Loading restaurant details...</div>;
+    return (
+      <div className="loading-spinner">
+        <div className="spinner"></div>
+      </div>
+    );
   }
 
   if (!restaurant) {
@@ -36,7 +44,7 @@ const RestaurantDetail = () => {
   }
 
   return (
-    <div className="detail-container">
+    <div className="detail-container page-transition">
       <div className="detail-header">
         <img
           src={restaurant.image}
@@ -96,7 +104,21 @@ const RestaurantDetail = () => {
                   <p className="menu-item-description">{item.description}</p>
                   <div className="menu-item-footer">
                     <span className="menu-item-price">₹{item.price}</span>
-                    <button className="add-button">Add</button>
+                    <div
+                      className="add-button"
+                      role="button"
+                      tabIndex={0}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log("Adding to cart:", item.name);
+                        addToCart({ ...item, restaurantId: restaurant._id });
+                        setAddedItemId(item._id);
+                        setTimeout(() => setAddedItemId(null), 2000);
+                      }}
+                    >
+                      {addedItemId === item._id ? "Added ✓" : "Add"}
+                    </div>
                   </div>
                 </div>
               </div>

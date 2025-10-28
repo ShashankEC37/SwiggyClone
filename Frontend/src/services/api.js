@@ -9,14 +9,42 @@ const api = axios.create({
   },
 });
 
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// Response interceptor to handle token expiration
+api.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response?.status === 401) {
+      // Token expired or invalid
+      localStorage.removeItem("token");
+      window.location.href = "/login";
+    }
+    return Promise.reject(error);
+  }
+);
+
 export const signupAPI = async (userData) => {
   const data = await api.post("/auth/signup", userData);
   return data;
 };
 
-export const loginAPI = async (credintials) => {
-  const response = await api.post("/auth/login", credintials);
-  return response;
+export const loginAPI = async (credentials) => {
+  const response = await api.post("/auth/login", credentials);
+  return response.data; // Make sure this returns response.data, not just response
 };
 
 export const getRestaurantsAPI = async () => {
@@ -31,5 +59,21 @@ export const getRestaurantByIdAPI = async (id) => {
 
 export const getMenuItemsAPI = async (restaurantId) => {
   const response = await api.get(`/menu-items/restaurant/${restaurantId}`);
+  return response.data;
+};
+
+// Order APIs
+export const createOrderAPI = async (orderData) => {
+  const response = await api.post("/orders", orderData);
+  return response.data;
+};
+
+export const getUserOrdersAPI = async (userId) => {
+  const response = await api.get(`/orders/user/${userId}`);
+  return response.data;
+};
+
+export const getOrderByIdAPI = async (orderId) => {
+  const response = await api.get(`/orders/${orderId}`);
   return response.data;
 };

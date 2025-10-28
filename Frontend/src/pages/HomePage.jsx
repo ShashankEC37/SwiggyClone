@@ -7,7 +7,8 @@ const HomePage = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
+  const [searchQuery, setSearchQuery] = useState("");
+  const [foodTypeFilter, setFoodTypeFilter] = useState("all");
   useEffect(() => {
     fetchRestaurants();
   }, []);
@@ -24,17 +25,66 @@ const HomePage = () => {
   };
 
   if (loading) {
-    return <div className="loading">Loading restaurants...</div>;
+    return (
+      <div className="loading-spinner">
+        <div className="spinner"></div>
+      </div>
+    );
   }
 
+  const filteredRestaurants = restaurants.filter((restaurant) => {
+    const query = searchQuery.toLowerCase();
+    const matchesSearch =
+      restaurant.name.toLowerCase().includes(query) ||
+      restaurant.cuisine.some((c) => c.toLowerCase().includes(query));
+
+    const matchesFoodType =
+      foodTypeFilter === "all" || restaurant.foodType === foodTypeFilter;
+
+    return matchesSearch && matchesFoodType;
+  });
+
   return (
-    <div className="home-container">
+    <div className="home-container page-transition">
       <h2>Restaurants Near You</h2>
-      {restaurants.length === 0 ? (
-        <p className="no-restaurants">No restaurants available</p>
+      <input
+        type="text"
+        className="search-input"
+        placeholder="Search restaurants or cuisines..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+      <div className="filter-buttons">
+        <button
+          className={`filter-btn ${foodTypeFilter === "all" ? "active" : ""}`}
+          onClick={() => setFoodTypeFilter("all")}
+        >
+          All
+        </button>
+        <button
+          className={`filter-btn ${foodTypeFilter === "veg" ? "active" : ""}`}
+          onClick={() => setFoodTypeFilter("veg")}
+        >
+          🟢 Veg
+        </button>
+        <button
+          className={`filter-btn ${
+            foodTypeFilter === "non-veg" ? "active" : ""
+          }`}
+          onClick={() => setFoodTypeFilter("non-veg")}
+        >
+          🔴 Non-Veg
+        </button>
+      </div>
+      {filteredRestaurants.length === 0 ? (
+        <p className="no-restaurants">
+          {restaurants.length === 0
+            ? "No restaurants available"
+            : "No restaurants found matching your search"}
+        </p>
       ) : (
         <div className="restaurant-grid">
-          {restaurants.map((restaurant) => (
+          {filteredRestaurants.map((restaurant) => (
             <div
               key={restaurant._id}
               className="restaurant-card"

@@ -1,10 +1,12 @@
+
 .app-nav {
     padding: 20px;
-    background-color: orange;
+    background: linear-gradient(135deg, #fc8019 0%, #fc8019 100%);
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
 
 .app-nav h1 {
     color: white;
@@ -45,3 +47,21 @@
 .auth-details button:hover {
     background-color: #f0f0f0;
 }
+
+.cart-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .app-nav h1:hover {
+    cursor: pointer;
+  }
+  .user-name {
+    color: white;
+    font-weight: bold;
+    padding: 8px 16px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
